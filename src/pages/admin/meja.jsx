@@ -1,9 +1,9 @@
 import React from "react";
 import $ from "jquery";
 import axios from "axios";
-import Navbar from "../../components/navbar";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import Sidebar from "./sidebar";
 
 export default class Meja extends React.Component {
   constructor() {
@@ -11,15 +11,28 @@ export default class Meja extends React.Component {
     this.state = {
       meja: [],
       action: "",
+      token: "",
       id_meja: 0,
       nomor_meja: "",
       status_meja: "",
+      fillPassword: true
     }
+    if (localStorage.getItem("token")) {
+      this.state.token = localStorage.getItem("token")
+    } else {
+      window.location = "/"
+    }
+  }
+  headerConfig = () => {
+    let header = {
+      headers: { Authorization: `Bearer ${this.state.token}` }
+    }
+    return header
   }
   getMeja = () => {
     $("#dropdown").hide()
     let url = "http://localhost:4040/kasir/meja"
-    axios.get(url)
+    axios.get(url, this.headerConfig())
       .then(response => {
         this.setState({ meja: response.data.data })
       })
@@ -38,7 +51,7 @@ export default class Meja extends React.Component {
   getMejaStatus = (status) => {
     $("#dropdown").hide()
     let url = "http://localhost:4040/kasir/meja/status/" + status
-    axios.get(url)
+    axios.get(url, this.headerConfig())
       .then(response => {
         this.setState({ meja: response.data.data })
       })
@@ -60,6 +73,7 @@ export default class Meja extends React.Component {
       id_meja: 0,
       nomor_meja: "",
       status_meja: "",
+      fillPassword: true,
       action: "insert"
     })
   }
@@ -82,13 +96,13 @@ export default class Meja extends React.Component {
     }
     let url = "http://localhost:4040/kasir/meja"
     if (this.state.action === "insert") {
-      axios.post(url, sendData)
+      axios.post(url, sendData, this.headerConfig())
         .then(response => {
           window.alert(response.data.message)
           this.getMeja()
         })
     } else if (this.state.action === "update") {
-      axios.put(url, sendData)
+      axios.put(url, sendData, this.headerConfig())
         .then(response => {
           window.alert(response.data.message)
           this.getMeja()
@@ -100,7 +114,7 @@ export default class Meja extends React.Component {
   dropMeja = selectedItem => {
     if (window.confirm("Apakah anda yakin ingin menghapus data ini?")) {
       let url = "http://localhost:4040/kasir/meja/" + selectedItem.id_meja
-      axios.delete(url)
+      axios.delete(url, this.headerConfig())
         .then(response => {
           window.alert(response.data.message)
           this.getMeja()
@@ -131,8 +145,8 @@ export default class Meja extends React.Component {
   render() {
     return (
       <div className='flex h-screen w-full'>
-        <div class="w-full h-screen">
-          <Navbar />
+        <div class="w-full h-screen ml-16">
+          <Sidebar />
           <div class="relative mt-20 overflow-x-auto shadow-md sm:rounded-lg m-2">
             <h2 className="dark:text-white text-lg font-sans mb-2">
               Daftar Meja

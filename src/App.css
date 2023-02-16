@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.background {
+  background: rgb(155,161,123);
+  background: linear-gradient(90deg, rgba(155,161,123,1) 0%, rgba(207,185,151,1) 100%);
+  background-size: "cover";
+  height: 100vh;
+  margin-top: -70px;
+  background-repeat:no-repeat; 
+}

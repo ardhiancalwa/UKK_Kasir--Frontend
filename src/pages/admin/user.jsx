@@ -1,9 +1,9 @@
 import React from "react";
 import $ from "jquery";
 import axios from "axios";
-import Navbar from "../../components/navbar";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import Sidebar from "./sidebar";
 
 export default class User extends React.Component {
   constructor() {
@@ -152,8 +152,8 @@ export default class User extends React.Component {
   render() {
     return (
       <div className='flex h-screen w-full'>
-        <div class="w-full h-screen">
-          <Navbar />
+        <div class="w-full h-screen  ml-16">
+          <Sidebar />
           <div class="relative mt-20 overflow-x-auto shadow-md sm:rounded-lg m-2">
             <h2 className="dark:text-white text-lg font-sans mb-2">Daftar Petugas
               <button className="hover:bg-green-500 float-right bg-green-600 text-white font-bold uppercase text-xs px-4 py-3 mb-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150" type="button" onClick={() => this.Add()}>
