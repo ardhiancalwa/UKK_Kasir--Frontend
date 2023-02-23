@@ -3,7 +3,7 @@ import $ from "jquery";
 import axios from "axios";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import Sidebar from "./sidebar";
+import Navbar from "./navbar";
 
 export default class User extends React.Component {
   constructor() {
@@ -152,17 +152,22 @@ export default class User extends React.Component {
   render() {
     return (
       <div className='flex h-screen w-full'>
-        <div class="w-full h-screen  ml-16">
-          <Sidebar />
-          <div class="relative mt-20 overflow-x-auto shadow-md sm:rounded-lg m-2">
-            <h2 className="dark:text-white text-lg font-sans mb-2">Daftar Petugas
+        <div class="w-full h-screen">
+          <Navbar/>
+          <div class="relative mt-20 overflow-x-auto sm:rounded-lg m-2">
+            <h2 className="dark:text-white text-lg font-sans mb-2">
+              Daftar Petugas
               <button className="hover:bg-green-500 float-right bg-green-600 text-white font-bold uppercase text-xs px-4 py-3 mb-2 rounded-md shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150" type="button" onClick={() => this.Add()}>
                 Tambah Petugas
               </button>
             </h2>
+            <div className="relative mt-20 overflow-x-auto shadow-md sm:rounded-lg m-2">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
               <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
+                <th scope="col" class="px-6 py-3">
+                    No
+                  </th>
                   <th scope="col" class="px-6 py-3">
                     Nama
                   </th>
@@ -199,6 +204,9 @@ export default class User extends React.Component {
                 {this.state.user.map((item) => (
                   <tr class="bg-white border-b font-sans dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={item.id_user}>
                     <td class="px-6 py-4">
+                      {item.id_user}
+                    </td>
+                    <td class="px-6 py-4">
                       {item.nama_user}
                     </td>
                     <td class="px-6 py-4">
@@ -219,6 +227,7 @@ export default class User extends React.Component {
                 ))}
               </tbody>
             </table>
+            </div>
           </div>
         </div>
         {/* Modal */}

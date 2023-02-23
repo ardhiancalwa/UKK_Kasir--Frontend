@@ -2,6 +2,7 @@ import React from "react";
 import $ from "jquery";
 import axios from "axios";
 import Sidebar from "./sidebar";
+import Navbar from "./navbar";
 
 export default class Menu extends React.Component {
     constructor() {
@@ -171,10 +172,10 @@ export default class Menu extends React.Component {
     render() {
         return (
             <div className='flex h-screen w-full'>
-                <Sidebar />
-                <div class="w-full h-screen ml-16">
-                    <div class=" relative m-3 overflow-x-auto sm:rounded-lg ">
-                        <h2 className="dark:text-white mb-6 text-xl font-sans ml-3">Daftar Menu
+                <Navbar/>
+                <div class="w-full h-screen" style={{ fontFamily: "caviar dreams" }}>
+                    <div class=" relative m-3 overflow-x-auto sm:rounded-lg font-bold">
+                        <h2 className="dark:text-white mb-6 mt-14 text-xl ml-3">Daftar Menu
                             <button className="hover:bg-green-500 float-right mr-3 bg-green-600 text-white font-bold uppercase text-xs px-4 py-3 rounded-md shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150" type="button" onClick={() => this.Add()}>
                                 Tambah Menu
                             </button>
