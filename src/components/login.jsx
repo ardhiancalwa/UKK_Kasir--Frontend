@@ -43,7 +43,7 @@ export default class Login extends React.Component {
           } else if (this.state.role === "kasir") {
             window.location = '/kasir/pemesanan'
           } else if (this.state.role === "manajer") {
-            window.location = '/manajer'
+            window.location = '/manajer/chart'
           }
         }
         else {
@@ -57,25 +57,25 @@ export default class Login extends React.Component {
     return (
       <div>
         <section className="min-h-screen flex items-stretch text-white">
-          <div className="lg:flex sm:flex md:flex w-2/3 hidden bg-no-repeat bg-cover relative items-center" style={{ backgroundImage: `url(${background})` }}>
-            <div className="w-full px-24 z-10">
+          <div className="lg:flex sm:flex md:flex w-2/3 hidden bg-no-repeat bg-cover relative items-center opacity-75" style={{ backgroundImage: `url(${background})` }}>
+            <div className="w-ful px-24 z-10">
               <img src={logo} alt="logo" />
             </div>
           </div>
 
-          <div className="grid w-full py-6 z-20 content-center" style={{ fontFamily: "foundland" }}>
-            <h1 className="font-bold  text-3xl ml-28" style={{ color: "#1E1E1E" }}>Masuk</h1>
-            <p className="font-medium text-lg ml-28" style={{ color: "#1E1E1E" }}>Masukkan username dan password</p>
+          <div className="grid w-full py-6 z-20 content-center" style={{ fontFamily: "modern sans" }}>
+            <h1 className="font-bold text-3xl ml-28 text-white tracking-wider">Masuk</h1>
+            <p className="font-medium text-lg ml-28 text-white tracking-wide">Masukkan username dan password</p>
             <form action="" className="sm:w-2/3 mt-3 w-full px-4 lg:px-0 ml-28" onSubmit={ev => this.handleLogin(ev)}>
               <div>
-                <label for="small-input" class="text-lg block mb-2 font-semibold" style={{ color: "#1E1E1E" }}>Username</label>
-                <input type="text" id="username" name="username" onChange={this.bind} value={this.state.username} required  class="block w-full p-2 border rounded-xl bg-gray-50 sm:text-sm font-semibold dark:bg-gray-700 dark:border-amber-50 dark:placeholder-gray-400 dark:focus:ring-amber-100 dark:focus:border-amber-100" style={{backgroundColor: "#E1D7C6", color:"#1E1E1E"}}/>
+                <label for="small-input" class="text-lg block mb-2 font-semibold text-white tracking-wider">Username</label>
+                <input type="text" id="username" name="username" onChange={this.bind} value={this.state.username} required class="block w-full p-2 border rounded-xl bg-gray-50 sm:text-sm font-semibold dark:bg-gray-500 dark:border-gray-500  dark:placeholder-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500" />
               </div>
               <div className="mt-3">
-                <label for="small-input" class="text-lg block mb-2 font-semibold" style={{ color: "#1E1E1E" }}>Password</label>
-                <input type="password" id="password" name="password" class="block w-full p-2 border rounded-xl bg-gray-50 sm:text- font-semibold dark:bg-gray-700 dark:border-amber-50 dark:placeholder-gray-400 dark:focus:ring-amber-100 dark:focus:border-amber-100" onChange={this.bind} value={this.state.password} required style={{backgroundColor: "#E1D7C6", color:"#1E1E1E"}}/>
+                <label for="small-input" class="text-lg block mb-2 font-semibold text-white tracking-wider">Password</label>
+                <input type="password" id="password" name="password" class="block w-full p-2 border rounded-xl bg-gray-50 sm:text- font-semibold dark:bg-gray-500 dark:border-gray-500 dark:placeholder-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500" onChange={this.bind} />
               </div>
-              <button type="submit" class="mt-5 text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-semibold rounded-full text-sm px-6 py-2.5 text-center mr- mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" style={{backgroundColor: "#61764B"}}>Masuk</button>
+              <button type="submit" class="mt-5 text-white bg-lime-800 hover:bg-lime-900 focus:outline-none focus:ring-4 focus:ring-lime-300 font-semibold rounded-full text-sm px-6 py-2.5 text-center mr- mb-2 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-900 tracking-widest" >Masuk</button>
             </form>
           </div>
         </section>

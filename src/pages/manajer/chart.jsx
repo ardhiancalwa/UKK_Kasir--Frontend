@@ -1,77 +1,86 @@
-import React, { PureComponent } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import React, { useState, useEffect } from "react";
+import Chart from "react-apexcharts";
+import Navbar from "./navbar";
+import axios from "axios";
 
-const data = [
-  {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
+export default class Manajer extends React.Component {
+  constructor(props) {
+    super(props);
 
-export default class Chart extends PureComponent {
-  static demoUrl = 'https://codesandbox.io/s/bar-chart-has-background-62zcd';
+    this.state = {
+      token: '',
+      data: [],
+      options: {
+        chart: {
+          id: "basic-bar",
+        },
+        xaxis: {
+          categories: [],
+        },
+      },
+    };
+    if (localStorage.getItem("token")) {
+      this.state.token = localStorage.getItem("token")
+    } else {
+      window.location = "/"
+    }
+  }
+
+  headerConfig = () => {
+    let header = {
+      headers: { Authorization: `Bearer ${this.state.token}` }
+    }
+    return header;
+  }
+
+  componentDidMount() {
+    axios
+      .get("http://localhost:4040/kasir/pemesanan/qtybymenu", this.headerConfig())
+      .then((response) => {
+        const categories = response.data.map((data) => data.nama_menu);
+        const values = response.data.map((data) => data.total_qty);
+
+        this.setState({
+          data: [
+            {
+              name: "Value",
+              data: values,
+            },
+          ],
+          options: {
+            chart: {
+              id: "basic-bar",
+            },
+            xaxis: {
+              categories: categories,
+              labels: {
+                style: {
+                  fontFamily: "Arial, sans-serif",
+                  fontSize: "15px",
+                },
+              },
+            },
+          },
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   render() {
     return (
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart
-          width={500}
-          height={300}
-          data={data}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="pv" fill="#8884d8" background={{ fill: '#eee' }} />
-          <Bar dataKey="uv" fill="#82ca9d" />
-        </BarChart>
-      </ResponsiveContainer>
+      <div class="p-4 mt-20">
+        <Navbar />
+        <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+          <Chart
+            options={this.state.options}
+            series={this.state.data}
+            type="bar"
+            height={350}
+          />
+        </div>
+      </div>
     );
   }
 }
