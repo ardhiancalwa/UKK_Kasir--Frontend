@@ -43,7 +43,7 @@ export default class Login extends React.Component {
           } else if (this.state.role === "kasir") {
             window.location = '/kasir/pemesanan'
           } else if (this.state.role === "manajer") {
-            window.location = '/manajer/chart'
+            window.location = '/manajer/laporan'
           }
         }
         else {

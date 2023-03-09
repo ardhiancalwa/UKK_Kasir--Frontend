@@ -4,7 +4,6 @@ import Login from "./components/login";
 import Meja from "./pages/admin/meja";
 import Menu from "./pages/admin/menu";
 import User from "./pages/admin/user";
-import Chart from "./pages/manajer/chart";
 import HomeAdmin from "./pages/admin/home";
 import NavbarKasir from "./pages/kasir/navbar";
 import Pemesanan from "./pages/kasir/pemesanan";
@@ -13,7 +12,7 @@ import NavbarManajer from "./pages/manajer/navbar";
 import HomeManajer from "./pages/manajer/home";
 import NavbarAdmin from "./pages/admin/navbar";
 import HomeKasir from "./pages/kasir/home";
-import Manajer from "./pages/manajer/chart";
+import Manajer from "./pages/manajer/manajer";
 
 function App() {
   //   const myStyle={
@@ -37,7 +36,7 @@ function App() {
       <Route exact path="/kasir/riwayat" element={<RiwayatPemesanan />} />
       <Route exact path="/manajer/navbar" element={<NavbarManajer />} />
       <Route exact path="/manajer/home" element={<HomeManajer />} />
-      <Route exact path="/manajer/chart" element={<Manajer />} />
+      <Route exact path="/manajer/laporan" element={<Manajer />} />
     </Routes>
     // </div>
 

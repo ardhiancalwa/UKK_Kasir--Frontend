@@ -18,9 +18,11 @@ export default class Meja extends React.Component {
       status_meja: "",
       fillPassword: true
     }
-    if (localStorage.getItem("token")) {
+    let user = JSON.parse(localStorage.getItem('user'))
+    if (localStorage.getItem("token") && user.role === "admin") {
       this.state.token = localStorage.getItem("token")
     } else {
+      window.alert("Maaf, anda bukan admin")
       window.location = "/"
     }
   }
@@ -136,7 +138,7 @@ export default class Meja extends React.Component {
     } else {
       x.style.display = "none";
     }
-}
+  }
   close = () => {
     $("#modal_meja").hide()
   }
@@ -179,16 +181,16 @@ export default class Meja extends React.Component {
                     Status
                     <a href="#" onClick={() => this.status()} id="ikon1"><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z" /></svg></a>
                   </th>
-                  <div id="dropdown" class="z-10 hidden fixed bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-lime-500">
+                  <div id="dropdown" class="z-10 hidden fixed bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-slate-700">
                     <ul class="py-2 text-sm  text-white dark:text-white" aria-labelledby="dropdownDefaultButton">
                       <li>
-                        <a href="#" onClick={() => this.getMeja()} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-lime-600 dark:hover:text-white">Tampilkan Semua</a>
+                        <a href="#" onClick={() => this.getMeja()} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-600 dark:hover:text-white">Tampilkan Semua</a>
                       </li>
                       <li>
-                        <a href="#" onClick={() => this.getMejaStatus("tersedia")} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-lime-600 dark:hover:text-white">Tersedia</a>
+                        <a href="#" onClick={() => this.getMejaStatus("tersedia")} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-600 dark:hover:text-white">Tersedia</a>
                       </li>
                       <li>
-                        <a href="#" onClick={() => this.getMejaStatus("tidak_tersedia")} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-lime-600 dark:hover:text-white">Tidak Tersedia</a>
+                        <a href="#" onClick={() => this.getMejaStatus("tidak_tersedia")} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-600 dark:hover:text-white">Tidak Tersedia</a>
                       </li>
                     </ul>
                   </div>
@@ -211,7 +213,7 @@ export default class Meja extends React.Component {
                     </td>
 
                     <td class="px-0 py-3">
-                    <a data-tooltip-target="tooltip-editMeja" data-tooltip-placement="right" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-emerald-400 dark:hover:bg-emerald-600 dark:focus:ring-emerald-700" onClick={() => this.Edit(item)}>
+                      <a data-tooltip-target="tooltip-editMeja" data-tooltip-placement="right" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-emerald-400 dark:hover:bg-emerald-600 dark:focus:ring-emerald-700" onClick={() => this.Edit(item)}>
                         <FiEdit3 size={15} />
                         <span class="sr-only">Edit</span>
                       </a>
@@ -221,7 +223,7 @@ export default class Meja extends React.Component {
                       </div>
                     </td>
                     <td class="px-0 py-3">
-                    <a data-tooltip-target="tooltip-hapusMeja" data-tooltip-placement="right" type="button" class="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" onClick={() => this.dropMenu(item)}>
+                      <a data-tooltip-target="tooltip-hapusMeja" data-tooltip-placement="right" type="button" class="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" onClick={() => this.dropMenu(item)}>
                         <MdDelete size={15} />
                         <span class="sr-only">Hapus</span>
                       </a>

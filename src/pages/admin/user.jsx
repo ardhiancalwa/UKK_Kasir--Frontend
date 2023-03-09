@@ -21,9 +21,11 @@ export default class User extends React.Component {
       password: "",
       fillPassword: true
     }
-    if (localStorage.getItem("token")) {
+    let user = JSON.parse(localStorage.getItem('user'))
+    if (localStorage.getItem("token") && user.role === 'admin') {
       this.state.token = localStorage.getItem("token")
     } else {
+      window.alert("Maaf, anda bukan admin")
       window.location = "/"
     }
   }
@@ -193,19 +195,19 @@ export default class User extends React.Component {
                     <a href="#" onClick={() => this.role()} id="icon1"><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z" /></svg></a>
                     <a href="#" onClick={() => this.roleTutup()} id="icon2" className="hidden"><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z" /></svg></a>
                   </th>
-                  <div id="dropdown" class="z-10 hidden fixed bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-lime-500">
+                  <div id="dropdown" class="z-10 hidden fixed bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-slate-700">
                     <ul class="py-2 text-sm  text-white dark:text-white" aria-labelledby="dropdownDefaultButton">
                       <li>
-                        <a href="#" onClick={() => this.getUser()} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-lime-600 dark:hover:text-white">Tampilkan Semua</a>
+                        <a href="#" onClick={() => this.getUser()} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-600 dark:hover:text-white">Tampilkan Semua</a>
                       </li>
                       <li>
-                        <a href="#" onClick={() => this.getUserRole("manajer")} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-lime-600 dark:hover:text-white">Manajer</a>
+                        <a href="#" onClick={() => this.getUserRole("manajer")} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-600 dark:hover:text-white">Manajer</a>
                       </li>
                       <li>
-                        <a href="#" onClick={() => this.getUserRole("admin")} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-lime-600 dark:hover:text-white">Admin</a>
+                        <a href="#" onClick={() => this.getUserRole("admin")} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-600 dark:hover:text-white">Admin</a>
                       </li>
                       <li>
-                        <a href="#" onClick={() => this.getUserRole("kasir")} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-lime-600 dark:hover:text-white">Kasir</a>
+                        <a href="#" onClick={() => this.getUserRole("kasir")} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate  -600 dark:hover:text-white">Kasir</a>
                       </li>
                     </ul>
                   </div>
