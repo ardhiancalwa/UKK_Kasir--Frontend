@@ -50,7 +50,6 @@ export default class NavbarAdmin extends React.Component {
                   <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
               </div>
-              {/* <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-6 mr-3 md:mr-0 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" onClick={() => this.Logout()}>Keluar</button> */}
               <button data-collapse-toggle="navbar-search" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-search" aria-expanded="false">
                 <span class="sr-only">Open menu</span>
                 <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
@@ -65,7 +64,7 @@ export default class NavbarAdmin extends React.Component {
               </div>
               <ul class="flex flex-col p-4 mt-4 border border-gray-100 bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-600 md:dark:bg-gray-600">
                 <li>
-                  <a href="#" onClick={() => this.Navbar('home')} class="flex text-white bg-blue-700  md:bg-transparent md:text-blue-700 md:p-0 dark:text-white hover:bg-lime-500 active:bg-lime-500 hover:box-content rounded-md h-10 w-16 justify-center items-center" aria-current="page">Home</a>
+                  <a href="#" onClick={() => this.Navbar('home')} class="flex text-white bg-blue-700  md:bg-transparent md:text-blue-700 md:p-0 dark:text-white hover:bg-lime-500 active:bg-lime-500 hover:box-content rounded-md h-10 w-16 justify-center items-center" aria-current="page">Beranda</a>
                 </li>
                 <li>
                   <a href="#" onClick={() => this.Navbar('menu')} class="flex text-white bg-blue-700  md:bg-transparent md:text-blue-700 md:p-0 dark:text-white hover:bg-lime-500 active:bg-lime-500 hover:box-content rounded-md h-10 w-16 justify-center items-center" aria-current="page">Menu</a>

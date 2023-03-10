@@ -118,6 +118,7 @@ export default class Manajer extends React.Component {
           options: {
             chart: {
               id: "basic-bar",
+              foreColor: "#FAFAFA",
             },
             xaxis: {
               categories: categories,
@@ -127,6 +128,9 @@ export default class Manajer extends React.Component {
                   fontSize: "18px",
                 },
               },
+            },
+            fill: {
+              colors: "#84CC16",
             },
           },
         });
@@ -150,7 +154,7 @@ export default class Manajer extends React.Component {
               <li class="inline-flex items-center">
                 <a href="/manajer/home" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
                   <svg aria-hidden="true" class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
-                  Home
+                  Beranda
                 </a>
               </li>
               <li aria-current="page">
@@ -162,11 +166,11 @@ export default class Manajer extends React.Component {
             </ol>
           </nav>
           <div className="m-3 h-screen" style={{ fontFamily: "modern sans" }}>
-            <div className="flex justify-between mb-2 bg-zinc-700 text-white p-1.5 rounded-xl items-center">
+            <div className="flex justify-between mb-2 bg-gray-700 text-white p-1.5 rounded-xl items-center">
               <h1 className="ml-4 font-extrabold text-3xl text-lime-500 tracking-wider">Laporan Penjualan</h1>
             </div>
-            <div class="overflow-x-auto p-4 sm:rounded-xl bg-gray-600">
-              <button type="button" class="text-white ml-3 mb-5 mt-3 bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-bold rounded-xl text-xl px-5 py-0.5 text-center inline-flex items-center mr-2 dark:bg-gray-600 dark:focus:ring-lime-500">
+            <div class="overflow-x-auto p-4 sm:rounded-xl bg-gray-700">
+              <button type="button" class="text-white ml-3 mb-5 mt-3 bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-bold rounded-xl text-xl px-5 py-0.5 text-center inline-flex items-center mr-2 dark:bg-gray-700 dark:focus:ring-lime-500">
                 <button data-tooltip-target="tooltip-edit" data-tooltip-placement="bottom" type="button" class="text-lime-500 bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm p-1.5 text-center inline-flex items-center mr-3 dark:bg-white  ">
                   <GoGraph size={18} />
                   <span class="sr-only">Edit</span>
@@ -278,24 +282,26 @@ export default class Manajer extends React.Component {
             </div> */}
 
 
-            <div class="overflow-x-auto mt-10 shadow-md sm:rounded-lg">
+            <div class="overflow-x-auto mt-2 shadow-md sm:rounded-lg">
               <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <caption class="p-5 text-xl font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-zinc-700">
-                  Riwayat Pemesanan
-                  <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Riwayat pemesanan pada kafe Wikusama.</p>
-                  <form className="mt-2" onSubmit={(event) => this.getTransaksiUser(event)}>
-                    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-                    <div class="relative">
-                      <div class="absolute inset-y-0 left-0 flex items-center pl-1 pointer-events-none">
-                        <svg aria-hidden="true" class="w-5 h-5 ml-2 text-gray-500 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                      </div>
-                      <input type="search"
-                        id="search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-zinc-700 dark:border-zinc-400 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500" placeholder="Cari..." name="nama_user" onChange={this.bind} required />
-                      <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800">Cari</button>
+                <caption class="p-5 text-xl font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-700">
+                  <div className="flex justify-between">
+                    <div>
+                    <h1>Riwayat Pemesanan</h1>
+                    <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Riwayat pemesanan pada kafe Wikusama.</p>
                     </div>
-                  </form>
+                    <form className="mt-2" onSubmit={(event) => this.getTransaksiUser(event)}>
+                      <button type="button" data-collapse-toggle="search" aria-controls="search" aria-expanded="false" class="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1" >
+                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+                        <span class="sr-only">Search</span>
+                      </button>
+                      <div class="hidden md:block">
+                        <input type="search" id="search" class="block w-full p-2 pr-10 pl-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500" placeholder="Cari..." name="nama_user" onChange={this.bind} required />
+                      </div>
+                    </form>
+                  </div>
                 </caption>
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-zinc-700 dark:text-lime-300 border-t border-b border-lime-300">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-lime-300 border-t border-b border-lime-300">
                   <tr>
                     <th scope="col" class="px-6 py-3">
                       Nama Pelanggan
@@ -319,7 +325,7 @@ export default class Manajer extends React.Component {
                 </thead>
                 <tbody>
                   {this.state.transaksi.map(item => (
-                    <tr class="bg-white dark:bg-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-600">
+                    <tr class="bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                       <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         {item.nama_pelanggan}
                       </th>

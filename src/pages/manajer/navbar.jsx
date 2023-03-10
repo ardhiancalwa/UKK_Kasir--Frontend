@@ -1,7 +1,7 @@
 import React from "react";
 import { a } from "react-router-dom";
 
-export default class NavbarKasir extends React.Component {
+export default class NavbarManajer extends React.Component {
   Navbar = (a) => {
     if (a === 'home') {
       window.location = '/manajer/home'
@@ -59,7 +59,7 @@ export default class NavbarKasir extends React.Component {
               </div>
               <ul class="flex flex-col p-4 mt-4 border border-gray-100 bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-600 md:dark:bg-gray-600">
                 <li>
-                  <a href="#" onClick={() => this.Navbar('home')} class="flex text-white bg-blue-700  md:bg-transparent md:text-blue-700 md:p-0 dark:text-white hover:bg-lime-500 active:bg-lime-500 hover:box-content rounded-md h-10 w-16 justify-center items-center" aria-current="page">Home</a>
+                  <a href="#" onClick={() => this.Navbar('home')} class="flex text-white bg-blue-700  md:bg-transparent md:text-blue-700 md:p-0 dark:text-white hover:bg-lime-500 active:bg-lime-500 hover:box-content rounded-md h-10 w-16 justify-center items-center" aria-current="page">Beranda</a>
                 </li>
                 <li>
                   <a href="#" onClick={() => this.Navbar('laporan')} class="flex text-white bg-blue-700  md:bg-transparent md:text-blue-700 md:p-0 dark:text-white hover:bg-lime-500 active:bg-lime-500 hover:box-content rounded-md h-10 w-36 justify-center items-center" aria-current="page">Laporan Penjualan</a>

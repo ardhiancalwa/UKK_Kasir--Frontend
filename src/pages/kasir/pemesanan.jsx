@@ -219,11 +219,11 @@ export default class Pemesanan extends React.Component {
 
                 })
                 .catch(error => console.log(error))
-        } else if (this.state.jenis_pesanan === "dibungkus") {
+        } else if (this.state.jenis_pesanan === "bungkus") {
             axios.post(url, sendData, this.headerConfig())
                 .then(response => {
                     window.alert(response.data.message)
-                    window.location = '/kasir/riwayat'
+                    window.location = '/kasir/riwayat/'
                     this.getMenu()
                 })
                 .catch(error => console.log(error))
@@ -305,7 +305,7 @@ export default class Pemesanan extends React.Component {
                             <li class="inline-flex items-center">
                                 <a href="/kasir/home" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
                                     <svg aria-hidden="true" class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
-                                    Home
+                                    Beranda
                                 </a>
                             </li>
                             <li aria-current="page">
@@ -486,7 +486,7 @@ export default class Pemesanan extends React.Component {
                                             <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full p-2.5 dark:bg-gray-600 dark:border-none dark:placeholder-gray-400 dark:text-white" placeholder="Jenis Pesanan" name="jenis_pesanan" value={this.state.jenis_pesanan} onChange={this.bind} required>
                                                 <option value=''>Pilih Jenis Pesanan</option>
                                                 <option value="ditempat">Makan Ditempat</option>
-                                                <option value="dibungkus">Dibungkus</option>
+                                                <option value="bungkus">Dibungkus</option>
                                             </select>
                                         </div>
 

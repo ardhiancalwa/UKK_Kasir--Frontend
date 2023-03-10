@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 import background from "../img/login.jpg"
 import logo from "../img/logo.png";
-import hutan from "../img/hutan.jpg"
 
 export default class Login extends React.Component {
   constructor() {
@@ -69,11 +68,11 @@ export default class Login extends React.Component {
             <form action="" className="sm:w-2/3 mt-3 w-full px-4 lg:px-0 ml-28" onSubmit={ev => this.handleLogin(ev)}>
               <div>
                 <label for="small-input" class="text-lg block mb-2 font-semibold text-white tracking-wider">Username</label>
-                <input type="text" id="username" name="username" onChange={this.bind} value={this.state.username} required class="block w-full p-2 border rounded-xl bg-gray-50 sm:text-sm font-semibold dark:bg-gray-500 dark:border-gray-500  dark:placeholder-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500" />
+                <input type="text" id="username" name="username" onChange={this.bind} value={this.state.username} required class="block w-full p-2 border rounded-xl bg-gray-50 sm:text-sm font-semibold dark:bg-gray-500 dark:border-gray-500  dark:placeholder-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500 tracking-wider" />
               </div>
               <div className="mt-3">
                 <label for="small-input" class="text-lg block mb-2 font-semibold text-white tracking-wider">Password</label>
-                <input type="password" id="password" name="password" class="block w-full p-2 border rounded-xl bg-gray-50 sm:text- font-semibold dark:bg-gray-500 dark:border-gray-500 dark:placeholder-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500" onChange={this.bind} />
+                <input type="password" id="password" name="password" class="block w-full p-2 border rounded-xl bg-gray-50 sm:text- font-semibold dark:bg-gray-500 dark:border-gray-500 dark:placeholder-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500 tracking-wider" onChange={this.bind} />
               </div>
               <button type="submit" class="mt-5 text-white bg-lime-800 hover:bg-lime-900 focus:outline-none focus:ring-4 focus:ring-lime-300 font-semibold rounded-full text-sm px-6 py-2.5 text-center mr- mb-2 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-900 tracking-widest" >Masuk</button>
             </form>

@@ -23,7 +23,7 @@ export default class Menu extends React.Component {
             fillPassword: true
         }
         let user = JSON.parse(localStorage.getItem('user'))
-        if (localStorage.getItem("token") && user.role ==='admin') {
+        if (localStorage.getItem("token") && user.role === 'admin') {
             this.state.token = localStorage.getItem("token")
         } else {
             window.alert("Maaf, anda bukan admin")
@@ -38,6 +38,25 @@ export default class Menu extends React.Component {
     }
     getMenu = () => {
         let url = "http://localhost:4040/kasir/menu/"
+        axios.get(url, this.headerConfig())
+            .then(response => {
+                this.setState({ menu: response.data.data })
+            })
+            .catch(error => {
+                if (error.response) {
+                    if (error.response.status) {
+                        window.alert(error.response.data.message)
+                        window.location = '/'
+                    }
+                } else {
+                    console.log(error);
+                }
+            })
+    }
+
+    getNamaMenu = (event) => {
+        event.preventDefault()
+        let url = "http://localhost:4040/kasir/menu/menu/" + this.state.nama_menu
         axios.get(url, this.headerConfig())
             .then(response => {
                 this.setState({ menu: response.data.data })
@@ -184,7 +203,7 @@ export default class Menu extends React.Component {
                         <li class="inline-flex items-center">
                             <a href="/admin/home" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
                                 <svg aria-hidden="true" class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
-                                Home
+                                Beranda
                             </a>
                         </li>
                         <li aria-current="page">
@@ -198,9 +217,20 @@ export default class Menu extends React.Component {
                 <div className="m-3 h-screen" style={{ fontFamily: "modern sans" }}>
                     <div className="flex justify-between mb-2 bg-gray-700 text-white p-1.5 rounded-xl items-center">
                         <h1 className="ml-4 font-extrabold text-3xl text-lime-500 tracking-wider">Daftar Menu</h1>
-                        <button className="hover:bg-lime-600 bg-lime-500 text-white font-bold uppercase text-xs px-4 py-3 rounded-md shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150 tracking-wider" type="button" onClick={() => this.Add()}>
-                            Tambah Menu
-                        </button>
+                        <div className="flex">
+                            <form className="mr-2" onSubmit={(event) => this.getNamaMenu(event)}>
+                                <button type="button" data-collapse-toggle="search" aria-controls="search" aria-expanded="false" class="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1" >
+                                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+                                    <span class="sr-only">Search</span>
+                                </button>
+                                <div class="hidden md:block">
+                                    <input type="search" id="search" class="block w-full p-2 pl-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500" placeholder="Cari..." name="nama_menu" onChange={this.bind} required/>
+                                </div>
+                            </form>
+                            <button className="hover:bg-lime-600 bg-lime-500 text-white font-bold uppercase text-xs px-4 py-3 rounded-md shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150 tracking-wider" type="button" onClick={() => this.Add()}>
+                                Tambah Menu
+                            </button>
+                        </div>
                     </div>
                     <div className="grid grid-cols-5 bg-gray-700 rounded-xl">
                         {this.state.menu.map(item => (
@@ -240,7 +270,7 @@ export default class Menu extends React.Component {
                 </div>
                 {/* Modal */}
                 <div id="modal_menu" tabindex="-1" aria-hidden="true" class="overflow-x-auto fixed top-0 left-0 right-0 z-50 hidden w-full p-4 md:inset-0 h-modal md:h-full bg-tranparent bg-black bg-opacity-50">
-                    <div class="flex lg:h-auto w-auto justify-center" style={{fontFamily: "modern sans"}}>
+                    <div class="flex lg:h-auto w-auto justify-center" style={{ fontFamily: "modern sans" }}>
                         <div class="relative bg-white rounded-lg shadow dark:bg-gray-600 w-1/3">
                             <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-lime-500 dark:hover:text-white" onClick={() => this.close()}>
                                 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
