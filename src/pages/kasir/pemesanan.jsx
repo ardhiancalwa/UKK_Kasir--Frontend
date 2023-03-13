@@ -24,7 +24,7 @@ export default class Pemesanan extends React.Component {
             status: '',
             jenis_pesanan: '',
             cart: [],
-            total: [],
+            totalBayar: 0,
         }
         let user = JSON.parse(localStorage.getItem('user'))
         if (localStorage.getItem("token") && user.role === "kasir") {
@@ -128,17 +128,14 @@ export default class Pemesanan extends React.Component {
                     }
                     this.state.cart.push(keranjang)
                     this.state.menus.push(res.data.data)
+                    var harga = this.state.menus.find(item => item.id_menu === value.id_menu).harga
+                    this.setState({ totalBayar: this.state.totalBayar + harga })
                 }
-                // const menuId = value.id_menu; // id menu yang dicari
-                // const order = this.state.cart.find(order => order.id_menu === menuId);// mencari objek dengan id menu yang dicari
-                // const qty = order.qty;
-                // this.setState({
-                //     qty: qty
-                // })
                 this.setState({
                     cart: this.state.cart,
                     menus: this.state.menus
                 })
+                console.log(this.state.menus)
             })
             .catch(error => console.log(error))
     };
@@ -154,6 +151,8 @@ export default class Pemesanan extends React.Component {
                 } else if (this.state.cart.find(item => item.id_menu === value.id_menu)) {
                     if (this.state.cart.find(item => item.qty > 0)) {
                         this.state.cart.find(item => item.id_menu === value.id_menu).qty--
+                        var harga = this.state.menus.find(item => item.id_menu === value.id_menu).harga
+                        this.setState({ totalBayar: this.state.totalBayar - harga })
                     } else {
                         window.alert("Belum ada yang dipesan")
                     }
@@ -180,25 +179,24 @@ export default class Pemesanan extends React.Component {
         const menu = this.state.menus.find((item) => item.id_menu === itemId);
         return item ? menu.harga * item.qty : 0;
     }
-    // getTotalBayar(itemId) {
-    //     var item = []
-    //     item.push(this.state.cart.find((item) => item.id_menu === itemId))
-    //     var menu = []
-    //     menu.push(this.state.menus.find((item) => item.id_menu === itemId))
-    //     var totalBayar = 0
-    //     for (var i = 0; i < item.length; i++) {
-    //         totalBayar += menu[i].harga * item[i].qty
-    //     }
-    //     return totalBayar
-    // }
     saveTransaksi = (event) => {
         event.preventDefault()
         $("#modal_transaksi").show()
-        let sendData = {
+        let sendDataDitempat = {
             id_transaksi: this.state.id_transaksi,
             tgl_transaksi: this.state.tgl_transaksi,
             id_user: this.state.id_user,
             id_meja: this.state.id_meja,
+            nama_pelanggan: this.state.nama_pelanggan,
+            status: this.state.status,
+            jenis_pesanan: this.state.jenis_pesanan,
+            detail_transaksi: this.state.cart
+        }
+        let sendDataBungkus = {
+            id_transaksi: this.state.id_transaksi,
+            tgl_transaksi: this.state.tgl_transaksi,
+            id_user: this.state.id_user,
+            id_meja: null,
             nama_pelanggan: this.state.nama_pelanggan,
             status: this.state.status,
             jenis_pesanan: this.state.jenis_pesanan,
@@ -210,7 +208,7 @@ export default class Pemesanan extends React.Component {
         }
         let url = "http://localhost:4040/kasir/pemesanan"
         if (this.state.jenis_pesanan === "ditempat") {
-            axios.post(url, sendData, this.headerConfig())
+            axios.post(url, sendDataDitempat, this.headerConfig())
                 .then(response => {
                     window.alert(response.data.message)
                     axios.put("http://localhost:4040/kasir/meja/", data, this.headerConfig())
@@ -220,7 +218,7 @@ export default class Pemesanan extends React.Component {
                 })
                 .catch(error => console.log(error))
         } else if (this.state.jenis_pesanan === "bungkus") {
-            axios.post(url, sendData, this.headerConfig())
+            axios.post(url, sendDataBungkus, this.headerConfig())
                 .then(response => {
                     window.alert(response.data.message)
                     window.location = '/kasir/riwayat/'
@@ -294,7 +292,13 @@ export default class Pemesanan extends React.Component {
         }
 
     }
-
+    nomorMejaShow = () => {
+        if (this.state.jenis_pesanan === "ditempat") {
+            $("#meja").show()
+        } else {
+            $("#meja").hide()
+        }
+    }
     render() {
         return (
             <div className='flex h-screen w-full'>
@@ -394,12 +398,6 @@ export default class Pemesanan extends React.Component {
                                 <h3 class="text-xl mb-5 font-bold text-gray-900 dark:text-white">Pemesanan</h3>
                                 <div className="flex">
                                     <div class="mr-10">
-                                        {/* {this.state.menus.map((item,index) => (
-                                        <div className="px-6 py-4" key={index}>
-                                            Total Bayar: {this.convertToRupiah(this.getTotalBayar(item.id_menu))}
-                                        </div>
-                                    ))} */}
-
                                         <div class="relative overflow-x-auto shadow-md sm:rounded-2xl">
                                             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-300 tracking-wider">
                                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-500 dark:text-white ">
@@ -414,7 +412,7 @@ export default class Pemesanan extends React.Component {
                                                             QTY
                                                         </th>
                                                         <th scope="col" class="px-6 py-3">
-                                                            Total
+                                                            Total Harga
                                                         </th>
                                                     </tr>
                                                 </thead>
@@ -437,44 +435,10 @@ export default class Pemesanan extends React.Component {
                                                     ))}
                                                 </tbody>
                                             </table>
+                                            <div className="bg-gray-200 p-2 border-2">
+                                                <p className="font-sans text-gray-600">Total Bayar: {this.convertToRupiah(this.state.totalBayar)}</p>
+                                            </div>
                                         </div>
-
-                                        {/* <table class="w-full text-sm rounded-xl text-left text-gray-500 dark:text-white">
-                                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-lime-500 dark:text-white">
-                                                <tr>
-                                                    <th scope="col" class="px-6 py-3">
-                                                        Nama Menu
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3">
-                                                        Harga
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3">
-                                                        qty
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3">
-                                                        Total
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {this.state.menus.map((item) => (
-                                                    <tr class="bg-white border-b font-sans dark:bg-slate-600 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={item.id_menu}>
-                                                        <td class="px-6 py-4">
-                                                            {item.nama_menu}
-                                                        </td>
-                                                        <td class="px-6 py-4">
-                                                            {this.convertToRupiah(item.harga)}
-                                                        </td>
-                                                        <td class="px-6 py-4">
-                                                            {this.getQty(item.id_menu)}
-                                                        </td>
-                                                        <td class="px-6 py-4">
-                                                            {this.convertToRupiah(this.getHarga(item.id_menu))}
-                                                        </td>
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table> */}
                                     </div>
                                     <form class="space-y-6" onSubmit={(event) => this.saveTransaksi(event)}>
                                         <div className="">
