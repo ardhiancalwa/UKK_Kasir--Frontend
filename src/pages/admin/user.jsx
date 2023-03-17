@@ -207,7 +207,7 @@ export default class User extends React.Component {
                         <a href="#" onClick={() => this.getUserRole("admin")} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-600 dark:hover:text-white">Admin</a>
                       </li>
                       <li>
-                        <a href="#" onClick={() => this.getUserRole("kasir")} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate  -600 dark:hover:text-white">Kasir</a>
+                        <a href="#" onClick={() => this.getUserRole("kasir")} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-600 dark:hover:text-white">Kasir</a>
                       </li>
                     </ul>
                   </div>
@@ -243,7 +243,7 @@ export default class User extends React.Component {
                       </div>
                     </td>
                     <td class="px-0 py-4">
-                      <a data-tooltip-target="tooltip-hapusUser" data-tooltip-placement="right" type="button" class="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" onClick={() => this.dropMenu(item)}>
+                      <a data-tooltip-target="tooltip-hapusUser" data-tooltip-placement="right" type="button" class="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" onClick={() => this.dropUser(item)}>
                         <MdDelete size={15} />
                         <span class="sr-only">Hapus</span>
                       </a>

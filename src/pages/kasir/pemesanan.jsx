@@ -119,8 +119,12 @@ export default class Pemesanan extends React.Component {
                     }
                     this.state.cart.push(keranjang)
                     this.state.menus.push(res.data.data)
+                    var harga1 = this.state.menus.find(item => item.id_menu === value.id_menu).harga
+                    this.setState({ totalBayar: harga1 })
                 } else if (this.state.cart.find(item => item.id_menu === value.id_menu)) {
                     this.state.cart.find(item => item.id_menu === value.id_menu).qty++
+                    var harga2 = this.state.menus.find(item => item.id_menu === value.id_menu).harga
+                    this.setState({ totalBayar: this.state.totalBayar + harga2 })
                 } else if (this.state.cart.find(item => item.id_menu !== value.id_menu)) {
                     const keranjang = {
                         id_menu: value.id_menu,

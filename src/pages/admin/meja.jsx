@@ -223,7 +223,7 @@ export default class Meja extends React.Component {
                       </div>
                     </td>
                     <td class="px-0 py-3">
-                      <a data-tooltip-target="tooltip-hapusMeja" data-tooltip-placement="right" type="button" class="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" onClick={() => this.dropMenu(item)}>
+                      <a data-tooltip-target="tooltip-hapusMeja" data-tooltip-placement="right" type="button" class="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" onClick={() => this.dropMeja(item)}>
                         <MdDelete size={15} />
                         <span class="sr-only">Hapus</span>
                       </a>

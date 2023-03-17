@@ -173,7 +173,8 @@ export default class Manajer extends React.Component {
           ],
           options: {
             chart: {
-              id: "basic-bar",
+              // id: "basic-bar",
+              type: 'line',
               foreColor: "#FAFAFA",
             },
             xaxis: {
@@ -254,15 +255,28 @@ export default class Manajer extends React.Component {
   }
 
   pendapatan = () => {
-    for (let i = 0; i < this.state.detail.length; i++) {
-      var harga = this.state.detail[i].menu.harga
-      var qty = this.state.detail[i].qty
-      var subTotal = harga * qty
-      this.state.pendapatan = this.state.pendapatan + subTotal
-    }
-    console.log(this.state.pendapatan)
-    console.log(this.state.detail)
-    return this.state.pendapatan
+    $("#pendapatan").show()
+    $("#btn").hide()
+    axios.get("http://localhost:4040/kasir/pemesanan/detail/", this.headerConfig())
+      .then(response => {
+        this.setState({ detail: response.data.data })
+        for (let i = 0; i < response.data.data.length; i++) {
+          var harga = response.data.data[i].menu.harga
+          var qty = response.data.data[i].qty
+          var subTotal = harga * qty
+          this.setState({ pendapatan: this.state.pendapatan + subTotal })
+        }
+      })
+      .catch(error => {
+        if (error.response) {
+          if (error.response.status) {
+            window.alert(error.response.data.message)
+            window.location = '/'
+          }
+        } else {
+          console.log(error);
+        }
+      })
   }
 
   getNomorMeja = (value) => {
@@ -272,6 +286,14 @@ export default class Manajer extends React.Component {
       return "tidak ada"
     }
 
+  }
+
+  laporan = () => {
+    $("#refresh").hide()
+    const printContents = document.getElementById("laporan").innerHTML;
+    document.body.innerHTML = printContents;
+    window.print();
+    window.location.reload()
   }
 
   render() {
@@ -323,7 +345,15 @@ export default class Manajer extends React.Component {
                     <div>
                       <h1>Riwayat Penjualan</h1>
                       <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Riwayat pemesanan pada kafe Wikusama.</p>
-                      <p className="text-base text-white">Total Pendapatan: {this.convertToRupiah(this.pendapatan())}</p>
+                      <button className="float-right mr-3 hover:bg-green-800 bg-green-700 text-white text-sm py-2 px-4 rounded-lg shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150" type="button" onClick={() => this.laporan()}>
+                        Unduh Laporan
+                      </button>
+                      <button id="btn" className="float-right mr-3 hover:bg-lime-600 bg-lime-500 text-white text-sm py-2 px-4 rounded-lg shadow hover:shadow-md outline-none focus:outline-none ease-linear transition-all duration-150" type="button" onClick={() => this.pendapatan()}>
+                        Tampilkan Pendapatan
+                      </button>
+                      <div className="bg-gray-700 items-center hidden" id="pendapatan">
+                        <p className=" text-gray-300 text-sm">Total Pendapatan: {this.convertToRupiah(this.state.pendapatan)}</p>
+                      </div>
                     </div>
                     <div className="flex justify-between items-center">
                       <form className="mr-3" onSubmit={(event) => this.getTransaksiUser(event)}>

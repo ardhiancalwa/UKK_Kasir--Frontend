@@ -72,9 +72,9 @@ export default class Login extends React.Component {
               </div>
               <div className="mt-3">
                 <label for="small-input" class="text-lg block mb-2 font-semibold text-white tracking-wider">Password</label>
-                <input type="password" id="password" name="password" class="block w-full p-2 border rounded-xl bg-gray-50 sm:text- font-semibold dark:bg-gray-500 dark:border-gray-500 dark:placeholder-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500 tracking-wider" onChange={this.bind} />
+                <input type="password" id="password" name="password" class="block w-full p-2 border rounded-xl bg-gray-50  font-semibold dark:bg-gray-500 dark:border-gray-500 dark:placeholder-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500 tracking-wider" onChange={this.bind} />
               </div>
-              <button type="submit" class="mt-5 text-white bg-lime-800 hover:bg-lime-900 focus:outline-none focus:ring-4 focus:ring-lime-300 font-semibold rounded-full text-sm px-6 py-2.5 text-center mr- mb-2 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-900 tracking-widest" >Masuk</button>
+              <button type="submit" class="mt-5 text-white bg-lime-800 hover:bg-lime-900 shadow-lime-900 focus:outline-none focus:ring-4 focus:ring-lime-300 font-semibold rounded-full text-sm px-6 py-2.5 text-center mr- mb-2 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-900 tracking-widest" >Masuk</button>
             </form>
           </div>
         </section>
